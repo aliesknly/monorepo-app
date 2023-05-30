@@ -1,0 +1,13 @@
+{
+  "name": "constants",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "devDependencies": {},
+  "scripts": {
+    "build": "tsc src/index.ts --outDir dist"
+  },
+  "dependencies": {
+    "is-even": "*"
+  }
+}
