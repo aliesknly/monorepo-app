@@ -15,8 +15,8 @@ export class UsersService {
     return deleteProperty<ShowUserDto>(newUser.toObject(), 'password');
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll(): Promise<ShowUserDto[]> {
+    return this.user.find();
   }
 
   findOne(id: number) {
