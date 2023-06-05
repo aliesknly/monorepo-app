@@ -1,12 +1,8 @@
-import {
-  createSelector,
-  createSlice,
-  EntityState,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
 import { UserEntity } from '../domain/user.entity';
 import { userAdapter } from '../adapters/api';
 import { fetchUser } from '../adapters/api/fetch.thunk';
+import { RootState } from '../../../infrastructure';
 
 export const USER_FEATURE_KEY = 'user';
 
@@ -18,6 +14,8 @@ export interface UserState extends EntityState<UserEntity> {
 export const initialUserState: UserState = userAdapter.getInitialState({
   loadingStatus: 'not loaded',
   error: '',
+  entities: [],
+  totalCount: 0,
 });
 
 export const userSlice = createSlice({
@@ -26,7 +24,9 @@ export const userSlice = createSlice({
   reducers: {
     add: userAdapter.addOne,
     remove: userAdapter.removeOne,
-    // ...
+    showAll: (state: UserState, action: any) => {
+      state.entities = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -36,7 +36,7 @@ export const userSlice = createSlice({
       .addCase(
         fetchUser.fulfilled,
         (state: UserState, action: PayloadAction<UserEntity[]>) => {
-          userAdapter.setAll(state, action.payload);
+          userAdapter.setAll(state, action);
           state.loadingStatus = 'loaded';
         }
       )
@@ -51,11 +51,5 @@ export const userReducer = userSlice.reducer;
 
 export const userActions = userSlice.actions;
 
-const { selectAll, selectEntities } = userAdapter.getSelectors();
-
-export const getUserState = (rootState: any): UserState =>
-  rootState[USER_FEATURE_KEY];
-
-export const selectAllUser = createSelector(getUserState, selectAll);
-
-export const selectUserEntities = createSelector(getUserState, selectEntities);
+export const { selectAll: selectAllUser, selectEntities: SelectUserEntities } =
+  userAdapter.getSelectors((state: RootState) => state.user);

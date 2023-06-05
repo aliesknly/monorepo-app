@@ -1,5 +1,8 @@
-export default function Button() {
+import Button from '@mui/material/Button';
+export default function ButtonTest() {
     return (
-        <div>Button</div>
+        <Button variant="contained" sx={{ mr: 1 }}>
+            Add user
+        </Button>
     )
 }

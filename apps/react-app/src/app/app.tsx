@@ -1,7 +1,10 @@
 import { Button } from '@monorepo/ui'
+import User from './pages/User';
 export function App() {
   return (
-    <Button />
+    <>
+      <User />
+      <Button /></>
   );
 }
 
