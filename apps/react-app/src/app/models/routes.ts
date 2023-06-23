@@ -1,7 +1,3 @@
-export enum routesName {
- 
-}
-
 export enum publicRoutes {
   LOGIN = 'login',
   HOME = '/',
@@ -12,7 +8,9 @@ export enum privateRoutes {
   USER = 'user',
 }
 
-export const RoutesList = [
-  { name: 'home', url: publicRoutes.HOME },
-  { name: 'login', url: publicRoutes.HOME },
+export const routesHeaderList = [
+  { name: 'home', url: publicRoutes.HOME, labeId: 'home' },
+  { name: 'login', url: publicRoutes.HOME, labeId: 'login' },
 ];
+
+export type RouterHeaderListType = typeof routesHeaderList[0];
