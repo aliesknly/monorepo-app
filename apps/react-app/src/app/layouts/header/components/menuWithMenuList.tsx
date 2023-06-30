@@ -1,6 +1,6 @@
 import { Menu } from '@mui/material';
 import { ComponentType, MouseEventHandler } from 'react';
-import { RouterHeaderListType, routesHeaderList } from '../../models';
+import { RouterHeaderListType, routesHeaderList } from '../../../models';
 
 interface Props {
   anchorElNav: null | HTMLElement;

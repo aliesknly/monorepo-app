@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import AdbIcon from '@mui/icons-material/Adb';
 import {
   AppBar,
-  Box,
   Toolbar,
   Typography,
   Container,
@@ -14,8 +13,9 @@ import {
   IconButton,
 } from '@mui/material';
 import { MouseEvent, useState } from 'react';
-import { menuWithMenuList } from './menuWithMenuList';
-import ButtonLink from './ButtonLink';
+import { menuWithMenuList } from './components/menuWithMenuList';
+import ButtonLink from './components/ButtonLink';
+import { BoxContainer, LabelTitle } from './components';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -29,6 +29,7 @@ export default function Header() {
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -46,25 +47,11 @@ export default function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+          <LabelTitle>LOGO</LabelTitle>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <BoxContainer
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -76,31 +63,16 @@ export default function Header() {
               <MenuIcon />
             </IconButton>
             <MenuComponent
-              anchorElNav={anchorElNav}
               handleCloseNavMenu={handleCloseNavMenu}
+              anchorElNav={anchorElNav}
               handleCloseUserMenu={handleCloseUserMenu}
             />
-          </Box>
+          </BoxContainer>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+          <LabelTitle>LOGO</LabelTitle>
+          <BoxContainer
+            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -110,9 +82,8 @@ export default function Header() {
                 {page}
               </Button>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+          </BoxContainer>
+          <BoxContainer sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -140,7 +111,7 @@ export default function Header() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </BoxContainer>
         </Toolbar>
       </Container>
     </AppBar>
