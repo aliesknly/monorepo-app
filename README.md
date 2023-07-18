@@ -4,11 +4,25 @@
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
 
-## Create enviroments `.env` file:
+## Create enviroments APPS: `.env` file:
 
-`DATABASE_URL = <database uri>`
+### - Core:
+`CORE_DATABASE_NAME = <database name>`
 
-`NODE_ENV = <develop | production>`
+`CORE_PORT = <number of port>`
+
+### - Product:
+`PRODUCT_DATABASE_NAME = <database name>`
+
+`PRODUCT_PORT = <number of port>`
+
+### - Store:
+`STORE_DATABASE_NAME = <database name>`
+
+`STORE_PORT = <number of port>`
+
+
+
 ## Important:
 Recommended to have `Docker` and use the command:
 `docker compose up -d`

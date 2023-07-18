@@ -23,6 +23,74 @@
         "production": {}
       }
     },
+    "core-build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/nest-app-core",
+        "main": "apps/nest-app/src/core/main.ts",
+        "tsConfig": "apps/nest-app/tsconfig.app.json",
+        "assets": ["apps/nest-app/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/nest-app/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "product-build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/nest-app-product",
+        "main": "apps/nest-app/src/product/main.ts",
+        "tsConfig": "apps/nest-app/tsconfig.app.json",
+        "assets": ["apps/nest-app/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/nest-app/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "core-serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "nest-app:core-build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "nest-app:core-build:development"
+        },
+        "production": {
+          "buildTarget": "nest-app:core-build:production"
+        }
+      }
+    },
+    "product-serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "nest-app:product-build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "nest-app:product-build:development"
+        },
+        "production": {
+          "buildTarget": "nest-app:product-build:production"
+        }
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
