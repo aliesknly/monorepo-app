@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { CoreService } from './core.service';
 
@@ -9,5 +9,10 @@ export class CoreController {
   @Get()
   getData() {
     return this.appService.getData();
+  }
+
+  @Post()
+   createNewProduct(@Body() body:any):string{
+    return this.appService.createNewProduct(body)
   }
 }

@@ -1,6 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 
 import { ProductService } from './product.service';
+import { EventPattern } from '@nestjs/microservices';
+import { ProductEvents } from '../common/microservice';
 
 @Controller()
 export class ProductController {
@@ -9,5 +11,10 @@ export class ProductController {
   @Get()
   getData() {
     return this.appService.getData();
+  }
+
+  @EventPattern(ProductEvents.CREATE_PRODUCT)
+  async createNewProduct(product: any) {
+    console.log('este es el evento', product);
   }
 }

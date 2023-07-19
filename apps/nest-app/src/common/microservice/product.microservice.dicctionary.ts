@@ -1,4 +1,4 @@
-enum ProductEvents {
+export enum ProductEvents {
   CREATE_PRODUCT = 'create-product',
   SHOW_PRODUCT = 'show-product',
   UPDATE_PRODUCT = 'update-product',
