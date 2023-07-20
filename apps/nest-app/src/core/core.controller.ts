@@ -12,7 +12,12 @@ export class CoreController {
   }
 
   @Post()
-   createNewProduct(@Body() body:any):string{
-    return this.appService.createNewProduct(body)
+  createNewProduct(@Body() body: any): string {
+    return this.appService.createNewProduct(body);
+  }
+
+  @Get('/show')
+  showProduct() {
+    return this.appService.showMessage();
   }
 }

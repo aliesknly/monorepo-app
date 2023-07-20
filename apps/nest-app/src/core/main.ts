@@ -14,7 +14,7 @@ async function bootstrap() {
   
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 5000;
+  const port = process.env['CORE_PORT'] || 5000;
 
   const config = new DocumentBuilder()
     .setTitle('Mono Repo core')

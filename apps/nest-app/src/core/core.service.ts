@@ -13,4 +13,9 @@ export class CoreService {
     this.productClient.emit(ProductEvents.CREATE_PRODUCT, product);
     return 'send queue';
   }
+
+  showMessage(){
+    this.productClient.emit(ProductEvents.SHOW_PRODUCT,{})
+    return "enviado"
+  }
 }

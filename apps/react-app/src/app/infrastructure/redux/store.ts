@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 export const store = configureStore<AppStore>({
   reducer: { [USER_FEATURE_KEY]: userReducer },
   // Additional middleware can be passed to this array
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.APP_ENV !== 'production',
   // Optional Redux store enhancers
 });
 
