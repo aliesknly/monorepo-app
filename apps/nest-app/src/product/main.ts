@@ -9,26 +9,18 @@ import { NestFactory } from '@nestjs/core';
 import { ProductModule } from './product.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-import { productConfig } from '../common/microservice';
+import { MicroserviceName, productConfig } from '../common/microservice';
 
 async function bootstrap() {
   const app = await NestFactory.create(ProductModule, { cors: true });
 
   app.connectMicroservice({
-    transport: Transport.KAFKA,
+    transport: Transport.RMQ,
     options: {
-      consumer:{
-        groupId:productConfig.name
-      },
-      client: {
-        brokers: [process.env['MICSRV_KAFKA_BROKERS']],
-        clientId:productConfig.name
-       /*  sasl:{
-          mechanism:'scram-sha-256',
-          username:process.env['MICSRV_KAFKA_USERNAME'],
-          password:process.env['MICSRV_KAFKA_PASSWORD']
-        },
-        ssl:true */
+      urls: [process.env['MICSRV_RBMQ_BROKERS']],
+      queue: MicroserviceName.PRODUCT,
+      queueOptions: {
+        durable: false,
       },
     },
   } as MicroserviceOptions);

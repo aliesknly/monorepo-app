@@ -13,14 +13,15 @@ export class ProductController {
     return this.appService.getData();
   }
 
-  @EventPattern(ProductEvents.CREATE_PRODUCT)
+  @MessagePattern(ProductEvents.CREATE_PRODUCT)
   async createNewProduct(product: any) {
     console.log('este es el evento', product);
+    return product
   }
 
   @MessagePattern(productConfig.events.SHOW_PRODUCT)
-  async showProduct(){
-    console.log("recivido")
-    return 'mi mensaje'
+  async showProduct(element) {
+    console.log('recivido');
+    return element;
   }
 }

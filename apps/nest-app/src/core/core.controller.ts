@@ -12,12 +12,14 @@ export class CoreController {
   }
 
   @Post()
-  createNewProduct(@Body() body: any): string {
-    return this.appService.createNewProduct(body);
+  createNewProduct(@Body() body: any) {
+    const product = this.appService.createNewProduct(body);
+    return { product, message: 'Objeto enviado' };
   }
 
   @Get('/show')
-  showProduct() {
-    return this.appService.showMessage();
+  async showProduct() {
+    const test = await this.appService.showMessage();
+    return { test, message: 'listado' };
   }
 }

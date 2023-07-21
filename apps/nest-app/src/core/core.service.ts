@@ -9,13 +9,17 @@ export class CoreService {
     return { message: 'Core' };
   }
 
-  createNewProduct(product: any): string {
-    this.productClient.emit(ProductEvents.CREATE_PRODUCT, product);
-    return 'send queue';
+  createNewProduct(product: any) {
+    const productCreated = this.productClient.emit(
+      ProductEvents.CREATE_PRODUCT,
+      product
+    );
+    return { productCreated, message: 'send queue' };
   }
 
-  showMessage(){
-    this.productClient.emit(ProductEvents.SHOW_PRODUCT,{})
-    return "enviado"
+  async showMessage() {
+    return await this.productClient.emit(ProductEvents.SHOW_PRODUCT, {
+      casa: 'azul',
+    });
   }
 }

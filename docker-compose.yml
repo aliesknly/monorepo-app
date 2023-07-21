@@ -10,28 +10,31 @@ services:
       - "27017:27017"
     networks:
       - backend
-
-  zookeeper:
-    image: wurstmeister/zookeeper
+  
+  rabitmq:
+    image: rabbitmq:management
     ports:
-    - "2181:2181"
-    expose:
-    - "2181"
-    networks:
-      - backend    
-
-  kafka:
-    image: wurstmeister/kafka
-    ports:
-    - "9092:9092"
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - backend
-    expose:
-    - "9092"    
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+
+#  zookeeper:
+#    image: wurstmeister/zookeeper
+#    ports:
+#    - "2181:2181"
+#    expose:
+#    - "2181"    
+#  kafka:
+#    image: wurstmeister/kafka
+#    ports:
+#    - "9092:9092"
+#    expose:
+#    - "9092"    
+#    environment:
+#      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
 
 volumes:
   mongodata:
